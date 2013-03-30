@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HDMI Control</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            $.ajax({
+                url: "/?cmd=list",
+                cache: false,
+                dataType:"json"
+            }).done(function( data ) {
+                for(var i=0; i<data.length;i++){
+                    $('#body').append('<a href=\"/?cmd=switch&port=' + data[i].port + '\">' + data[i].name + '</a>&#160;');
+                }
+            });
+        }
+    </script>
+</head>
+<body id='body'>
+
+</body>
+</html>
