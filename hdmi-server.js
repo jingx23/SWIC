@@ -52,7 +52,7 @@ var CEC_LIST_DEVICES = 'echo "scan" | cec-client -d 1 -s';
 
 var MODE_SWITCH = 'switch';
 var MODE_LIST = 'list';
-var regEx = new RegExp("#(\\d+):\\s(.*)");
+var CEC_DEVICE_REGEX = new RegExp("#(\\d+):\\s(.*)");
 
 /*
  * Main
@@ -67,7 +67,7 @@ http.createServer(function (req, res) {
         readStream.on('data', function(data) {
             var lines = data.toString().split('\n');
             for (var i = 0; i < lines.length; ++i){
-                var ccc = regEx.exec(lines[i]);
+                var ccc = CEC_DEVICE_REGEX.exec(lines[i]);
                 if(ccc){
                     var object = new Object();
                     object.port = ccc[1];
@@ -107,6 +107,7 @@ http.createServer(function (req, res) {
             }else{
                 responseHdmiFileJSON(hdmiListFilename);
             }
+            return;
         }else{
             //no matching comand
             console.error("Command not found: " + cmd);
@@ -114,10 +115,13 @@ http.createServer(function (req, res) {
             return;
         }
         exec(cmdToExecute, function (error, stdout, stderr) {
-            var result = '{"stdout":' + stdout + ',"stderr":"' + stderr + '","cmd":"' + cmd + '"}';
-            res.write(result + '\n');
+            var result = new Object();
+            result.stdout = stdout;
+            result.stderr = stderr;
+            result.cmd = cmd;
+            res.write(JSON.stringify(result));
+            res.end();
         });
-        res.end();
     } else {
         var uri = url.parse(req.url).pathname
             , filename = path.join(__dirname, uri);

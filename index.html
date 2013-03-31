@@ -6,18 +6,32 @@
     <script type="text/javascript">
         window.onload = function() {
             $.ajax({
-                url: "/?cmd=list",
+                url: '/?cmd=list',
                 cache: false,
                 dataType:"json"
             }).done(function( data ) {
                 for(var i=0; i<data.length;i++){
-                    $('#body').append('<a href=\"/?cmd=switch&port=' + data[i].port + '\">' + data[i].name + '</a>&#160;');
+                    $('#switchHdmi').append('<a href=\"javascript:doSwitchHdmi(' + data[i].port + ')">' + data[i].name + '</a>&#160;');
+                }
+            });
+        }
+
+        function doSwitchHdmi(port){
+            $.ajax({
+                url: '/?cmd=switch&port=' + port,
+                cache: false,
+                dataType:"json"
+            }).done(function( data ) {
+                if(data.stderr != ''){
+                    alert(data.stderr);
                 }
             });
         }
     </script>
 </head>
-<body id='body'>
-
+<body>
+<div id="switchHdmi">
+    <h3>Switch to:</h3>
+</div>
 </body>
 </html>
