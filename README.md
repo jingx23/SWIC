@@ -4,7 +4,7 @@ SWIC
 Small WebInterface for cec-client based on Node.js
 (Currently tested and working on Raspberry Pi (raspbmc))
 
-![alt text](https://github.com/jingx23/SWIC/blob/master/common/images/screen1.png "Example")
+![Example](https://github.com/jingx23/SWIC/raw/master/common/images/screen1.png "Example")
 
 Setup
 -----
