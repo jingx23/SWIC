@@ -14,8 +14,8 @@ var host = "127.0.0.1",
     fs = require("fs"),
     thisServerUrl = "http://" + host + ":" + port;
 
-//define your own hdmi ports
-var USER_DEFINED_HDMI_PORTS = [{ name: 'XBMC', port: 2 }];
+//define your own hdmi ports e.g [{ name: 'XBMC', port: 2 }]
+var USER_DEFINED_HDMI_PORTS = [];
 //define ports to ignore e.g [3]
 var BLACKLIST_HDMI_PORTS = [];
 
