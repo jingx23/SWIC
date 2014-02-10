@@ -16,6 +16,8 @@ var host = "127.0.0.1",
 
 //define your own hdmi ports
 var USER_DEFINED_HDMI_PORTS = [{ name: 'XBMC', port: 2 }];
+//define ports to ignore e.g [3]
+var BLACKLIST_HDMI_PORTS = [];
 
 /*
  * Functions
@@ -72,13 +74,21 @@ http.createServer(function (req, res) {
                     var object = new Object();
                     object.port = ccc[1];
                     object.name = ccc[2];
-                    objects.push(object);
+                    if(BLACKLIST_HDMI_PORTS.indexOf(object.port) == -1){
+                        objects.push(object);
+                    }
                 }
             }
         });
 
         readStream.on('end', function() {
-            objects = objects.concat(USER_DEFINED_HDMI_PORTS);
+            for(var i=0; i < USER_DEFINED_HDMI_PORTS.length; ++i){
+                var hdmiObj =  USER_DEFINED_HDMI_PORTS[i];
+                if(BLACKLIST_HDMI_PORTS.indexOf(hdmiObj.port) == -1){
+                    objects.push(hdmiObj);
+                }
+
+            }
             res.write(JSON.stringify(objects));
             res.end();
         });
