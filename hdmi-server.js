@@ -74,7 +74,7 @@ http.createServer(function (req, res) {
                     var object = new Object();
                     object.port = ccc[1];
                     object.name = ccc[2];
-                    if(BLACKLIST_HDMI_PORTS.indexOf(object.port) == -1){
+                    if(BLACKLIST_HDMI_PORTS.indexOf(parseInt(object.port)) == -1){
                         objects.push(object);
                     }
                 }
@@ -84,7 +84,8 @@ http.createServer(function (req, res) {
         readStream.on('end', function() {
             for(var i=0; i < USER_DEFINED_HDMI_PORTS.length; ++i){
                 var hdmiObj =  USER_DEFINED_HDMI_PORTS[i];
-                if(BLACKLIST_HDMI_PORTS.indexOf(hdmiObj.port) == -1){
+                console.log('xxx:' + hdmiObj.port);
+                if(BLACKLIST_HDMI_PORTS.indexOf(parseInt(hdmiObj.port)) == -1){
                     objects.push(hdmiObj);
                 }
 
