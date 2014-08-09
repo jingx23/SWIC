@@ -84,7 +84,6 @@ http.createServer(function (req, res) {
         readStream.on('end', function() {
             for(var i=0; i < USER_DEFINED_HDMI_PORTS.length; ++i){
                 var hdmiObj =  USER_DEFINED_HDMI_PORTS[i];
-                console.log('xxx:' + hdmiObj.port);
                 if(BLACKLIST_HDMI_PORTS.indexOf(parseInt(hdmiObj.port)) == -1){
                     objects.push(hdmiObj);
                 }
