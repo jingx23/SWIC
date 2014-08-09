@@ -8,13 +8,18 @@ Small WebInterface for cec-client based on Node.js
 
 Setup
 -----
-1. Install cec-client Raspberry Pi images can you get [here](http://sourceforge.net/projects/selfprogramming/files)
+1. Install cec-client [more information](https://github.com/Pulse-Eight/libcec)
 2. Configurate your hdmi-server.js
   * host
   * port
-  * USER_DEFINED_HDMI_PORTS => this array is optional, normally hdmi-server scans the hdmi bus to find all hdmi ports. In some case some ports wouldn´t be 
+  * USER_DEFINED_HDMI_PORTS => this array is optional, normally hdmi-server scans the hdmi bus to find all hdmi ports. In some case some ports wouldn´t be
     found so you can add them here.
 3. Fire node hdmi-server.js (Be patient on first call it takes some time because of scanning and caching hdmi ports)
+
+optional autostart setup:
+1. Edit init.d/swic
+2. copy init.d/swic to /etc/init.d/swic
+3. update-rc.d node-app defaults
 
 Additions
 ---------
