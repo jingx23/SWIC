@@ -19,7 +19,7 @@ Setup
 optional autostart setup:
 1. Edit init.d/swic
 2. copy init.d/swic to /etc/init.d/swic
-3. update-rc.d node-app defaults
+3. update-rc.d swic defaults
 
 Additions
 ---------
